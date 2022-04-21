@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import java.ac.uk.tees.w9547666.retailstoreapplication.R;
 
+/* This activity is the root activity that loads on launching the application
+    and splashes the name of the app with logo and redirects to home screen of the application*/
 
 public class SplashActivity extends FragmentActivity {
 
@@ -44,6 +46,8 @@ public class SplashActivity extends FragmentActivity {
         }, 3000);
     }
 
+    /*This method starts the splash screen applying necessary animations to logo and app name*/
+
     private void flyIn() {
         animation = AnimationUtils.loadAnimation(this, R.anim.logo_animation);
         logo.startAnimation(animation);
@@ -55,6 +59,8 @@ public class SplashActivity extends FragmentActivity {
         animation = AnimationUtils.loadAnimation(this, R.anim.pro_animation);
         appSlogan.startAnimation(animation);
     }
+
+    /*This method ends the splash screen applying necessary animations to logo and app name*/
 
     private void endSplash() {
         animation = AnimationUtils.loadAnimation(this,
