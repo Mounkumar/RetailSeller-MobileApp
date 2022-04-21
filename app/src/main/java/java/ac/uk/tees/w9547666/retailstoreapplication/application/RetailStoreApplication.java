@@ -5,11 +5,11 @@ import android.content.Context;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
-public class RetailSellerApplication extends Application {
-    private static RetailSellerApplication instance;
+public class RetailStoreApplication extends Application {
+    private static RetailStoreApplication instance;
     private static Context appContext;
 
-    public static RetailSellerApplication getInstance() {
+    public static RetailStoreApplication getInstance() {
         return instance;
     }
 
