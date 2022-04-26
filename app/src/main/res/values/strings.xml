@@ -9,4 +9,12 @@
     <string name="checkout">CheckOut</string>
     <string name="settings">Settings</string>
     <string name="offer_banner">"Shop for 2000 to get Rs 100 discount and shop for 3000 to get Rs 200 discount"</string>
+
+
+    <string name="address_value">Teesside University Middlesbrough, United Kingdome</string>
+    <string name="address">Address</string>
+    <string name="location">Location</string>
+    <string name="middlesbrough">Middlesbrough</string>
+    <string name="email_developer_">Email Developer:</string>
+    <string name="similar_product">You may also like</string>
 </resources>

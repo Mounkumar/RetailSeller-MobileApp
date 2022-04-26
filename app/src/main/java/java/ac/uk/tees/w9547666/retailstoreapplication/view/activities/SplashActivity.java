@@ -13,6 +13,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import java.ac.uk.tees.w9547666.retailstoreapplication.R;
 
+/**
+ * @author w9547666
+ */
 /* This activity is the root activity that loads on launching the application
     and splashes the name of the app with logo and redirects to home screen of the application*/
 

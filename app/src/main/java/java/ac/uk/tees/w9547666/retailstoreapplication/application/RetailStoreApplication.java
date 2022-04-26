@@ -5,6 +5,9 @@ import android.content.Context;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
+/**
+ * @author w9547666
+ */
 public class RetailStoreApplication extends Application {
     private static RetailStoreApplication instance;
     private static Context appContext;

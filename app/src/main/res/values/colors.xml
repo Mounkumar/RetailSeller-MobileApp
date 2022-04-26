@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#F44336</color>
+    <color name="accent_500">#E91E63</color>
 
     <color name="colorPrimary">#dd2c00</color>
     <color name="colorPrimaryDark">#a30000</color>
@@ -14,7 +16,23 @@
     <color name="toolbarIconColor">#FFFFFF</color>
     <color name="loginPageBackgroundColor">#000000</color>
     <color name="productGridBackgroundColor">#000000</color>
+    <color name="black_trans80">#14000000</color>
+    <color name="holo_gray_light">#33999999</color>
+    <color name="holo_gray_dark">#424242</color>
+    <color name="holo_green_light">#ff99cc00</color>
+
+
+    <color name="material_blue_500">#5677fc</color>
+
 
     <color name="background">#323232</color>
     <color name="holo_green_dark">#ff669900</color>
+
+    <color name="primary">#3f51b5</color>
+
+    <!-- Indigo 500 -->
+    <color name="primary_500">#3F51B5</color>
+    <!-- Indigo 700 -->
+    <color name="primary_700">#303F9F</color>
+
 </resources>
