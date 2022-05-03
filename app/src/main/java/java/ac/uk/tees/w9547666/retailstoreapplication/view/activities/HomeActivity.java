@@ -1,12 +1,9 @@
 package java.ac.uk.tees.w9547666.retailstoreapplication.view.activities;
 
-
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -73,18 +70,14 @@ public class HomeActivity extends AppCompatActivity {
 
         progressBar = (ContentLoadingProgressBar) findViewById(R.id.loading_bar);
 
-        checkOutAmount.setOnClickListener(new OnClickListener() {
+        checkOutAmount.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
+            Utils.vibrate(getApplicationContext());
 
-                Utils.vibrate(getApplicationContext());
+            Utils.switchContent(R.id.frag_container,
+                    Utils.SHOPPING_LIST_TAG, HomeActivity.this,
+                    AnimationType.SLIDE_UP);
 
-                Utils.switchContent(R.id.frag_container,
-                        Utils.SHOPPING_LIST_TAG, HomeActivity.this,
-                        AnimationType.SLIDE_UP);
-
-            }
         });
 
 
@@ -99,30 +92,22 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         findViewById(R.id.item_counter).setOnClickListener(
-                new OnClickListener() {
+                v -> {
 
-                    @Override
-                    public void onClick(View v) {
+                    Utils.vibrate(getApplicationContext());
+                    Utils.switchContent(R.id.frag_container,
+                            Utils.SHOPPING_LIST_TAG,
+                            HomeActivity.this, AnimationType.SLIDE_UP);
 
-                        Utils.vibrate(getApplicationContext());
-                        Utils.switchContent(R.id.frag_container,
-                                Utils.SHOPPING_LIST_TAG,
-                                HomeActivity.this, AnimationType.SLIDE_UP);
-
-                    }
                 });
 
         findViewById(R.id.checkout).setOnClickListener(
-                new OnClickListener() {
+                v -> {
 
-                    @Override
-                    public void onClick(View v) {
+                    Utils.vibrate(getApplicationContext());
 
-                        Utils.vibrate(getApplicationContext());
+                    showPurchaseDialog();
 
-                        showPurchaseDialog();
-
-                    }
                 });
 
         Utils.switchFragmentWithAnimation(R.id.frag_container,
@@ -132,55 +117,52 @@ public class HomeActivity extends AppCompatActivity {
         toggleBannerVisibility();
 
         mNavigationView
-                .setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                .setNavigationItemSelectedListener(menuItem -> {
 
-                        menuItem.setChecked(true);
-                        switch (menuItem.getItemId()) {
-                            case R.id.home:
+                    menuItem.setChecked(true);
+                    switch (menuItem.getItemId()) {
+                        case R.id.home:
 
-                                mDrawerLayout.closeDrawers();
+                            mDrawerLayout.closeDrawers();
 
-                                Utils.switchContent(R.id.frag_container,
-                                        Utils.HOME_FRAGMENT,
-                                        HomeActivity.this,
-                                        AnimationType.SLIDE_LEFT);
+                            Utils.switchContent(R.id.frag_container,
+                                    Utils.HOME_FRAGMENT,
+                                    HomeActivity.this,
+                                    AnimationType.SLIDE_LEFT);
 
-                                return true;
+                            return true;
 
-                            case R.id.my_cart:
+                        case R.id.my_cart:
 
-                                mDrawerLayout.closeDrawers();
+                            mDrawerLayout.closeDrawers();
 
-                                Utils.switchContent(R.id.frag_container,
-                                        Utils.SHOPPING_LIST_TAG,
-                                        HomeActivity.this,
-                                        AnimationType.SLIDE_LEFT);
-                                return true;
+                            Utils.switchContent(R.id.frag_container,
+                                    Utils.SHOPPING_LIST_TAG,
+                                    HomeActivity.this,
+                                    AnimationType.SLIDE_LEFT);
+                            return true;
 
-                            case R.id.contact_us:
+                        case R.id.contact_us:
 
-                                mDrawerLayout.closeDrawers();
+                            mDrawerLayout.closeDrawers();
 
-                                Utils.switchContent(R.id.frag_container,
-                                        Utils.CONTACT_US_FRAGMENT,
-                                        HomeActivity.this,
-                                        AnimationType.SLIDE_LEFT);
-                                return true;
+                            Utils.switchContent(R.id.frag_container,
+                                    Utils.CONTACT_US_FRAGMENT,
+                                    HomeActivity.this,
+                                    AnimationType.SLIDE_LEFT);
+                            return true;
 
-                            case R.id.settings:
+                        case R.id.settings:
 
-                                mDrawerLayout.closeDrawers();
+                            mDrawerLayout.closeDrawers();
 
-                                Utils.switchContent(R.id.frag_container,
-                                        Utils.SETTINGS_FRAGMENT_TAG,
-                                        HomeActivity.this,
-                                        AnimationType.SLIDE_LEFT);
-                                return true;
-                            default:
-                                return true;
-                        }
+                            Utils.switchContent(R.id.frag_container,
+                                    Utils.SETTINGS_FRAGMENT_TAG,
+                                    HomeActivity.this,
+                                    AnimationType.SLIDE_LEFT);
+                            return true;
+                        default:
+                            return true;
                     }
                 });
 
@@ -235,10 +217,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        // Store Shopping Cart in DB
-        /*new TinyDB(getApplicationContext()).putListObject(
-                PreferenceHelper.MY_CART_LIST_LOCAL, Repository
-                        .getCenterRepository().getListOfProductsInShoppingList());*/
     }
 
     @Override
@@ -261,14 +239,6 @@ public class HomeActivity extends AppCompatActivity {
             findViewById(R.id.new_offers_banner).setVisibility(View.GONE);
         }
     }
-
-    /*
-     * get total checkout amount
-     */
-    public BigDecimal getCheckoutAmount() {
-        return checkoutAmount;
-    }
-
 
     /*
      * Get Number of items in cart
@@ -295,54 +265,42 @@ public class HomeActivity extends AppCompatActivity {
 
         exitScreenDialog.setPositiveButton(
                 "Place Order",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //finish();
-                        dialog.cancel();
+                (dialog, id) -> {
+                    //finish();
+                    dialog.cancel();
 
-                        ArrayList<String> productId = new ArrayList<String>();
+                    ArrayList<String> productId = new ArrayList<>();
 
-                        for (Product productFromShoppingList : Repository.getCenterRepository().getListOfProductsInShoppingList()) {
+                    for (Product productFromShoppingList : Repository.getCenterRepository().getListOfProductsInShoppingList()) {
 
-                            //add product ids to array
-                            productId.add(productFromShoppingList.getProductId());
-                        }
-
-                        //pass product id array to Apriori ALGO
-                        Repository.getCenterRepository()
-                                .addToItemSetList(new HashSet<>(productId));
-
-
-
-                        //clear all list item
-                        Repository.getCenterRepository().getListOfProductsInShoppingList().clear();
-
-                        toggleBannerVisibility();
-
-                        itemCount = 0;
-                        itemCountTextView.setText(String.valueOf(0));
-                        checkoutAmount = new BigDecimal(BigInteger.ZERO);
-                        checkOutAmount.setText(Money.rupees(checkoutAmount).toString());
-
+                        //add product ids to array
+                        productId.add(productFromShoppingList.getProductId());
                     }
+
+                    //pass product id array to Apriori ALGO
+                    Repository.getCenterRepository()
+                            .addToItemSetList(new HashSet<>(productId));
+
+
+
+                    //clear all list item
+                    Repository.getCenterRepository().getListOfProductsInShoppingList().clear();
+
+                    toggleBannerVisibility();
+
+                    itemCount = 0;
+                    itemCountTextView.setText(String.valueOf(0));
+                    checkoutAmount = new BigDecimal(BigInteger.ZERO);
+                    checkOutAmount.setText(Money.rupees(checkoutAmount).toString());
+
                 });
 
         exitScreenDialog.setNegativeButton(
                 "Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
+                (dialog, id) -> dialog.cancel());
 
-        exitScreenDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                Snackbar.make(HomeActivity.this.getWindow().getDecorView().findViewById(android.R.id.content)
-                        , "Order Placed Successfully, Happy Shopping !!", Snackbar.LENGTH_LONG);
-
-            }
-        });
+        exitScreenDialog.setOnDismissListener(dialog -> Snackbar.make(HomeActivity.this.getWindow().getDecorView().findViewById(android.R.id.content)
+                , "Order Placed Successfully, Happy Shopping !!", Snackbar.LENGTH_LONG));
 
         AlertDialog alert11 = exitScreenDialog.create();
         alert11.show();
