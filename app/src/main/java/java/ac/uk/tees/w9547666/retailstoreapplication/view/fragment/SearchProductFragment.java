@@ -79,7 +79,7 @@ public class SearchProductFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                Toast.makeText(getActivity(), "Selected" + position, 500)
+                Toast.makeText(getActivity(), "Selected" + position, Toast.LENGTH_LONG)
                         .show();
 
             }
@@ -186,10 +186,7 @@ public class SearchProductFragment extends Fragment {
                 }
 
                 case REQ_SCAN_RESULT:
-                    //
-                    // String contents = data.getStringExtra("SCAN_RESULT");
-                    // String format = data.getStringExtra("SCAN_RESULT_FORMAT");
-                    // Toast.makeText(getActivity(), "Scan Success", 1000).show();
+
                     break;
 
             }

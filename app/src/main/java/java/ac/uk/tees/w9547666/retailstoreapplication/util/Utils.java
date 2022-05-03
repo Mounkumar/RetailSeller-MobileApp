@@ -29,7 +29,7 @@ public class Utils {
     public static final String SETTINGS_FRAGMENT_TAG = "SettingsFragment";
     public static final String CONTACT_US_FRAGMENT = "ContactUs";
     private static String CURRENT_TAG = null;
-
+    public static int CURRENT_CATEGORY = 0;
 
 
     public static void switchFragmentWithAnimation(int id, Fragment fragment,

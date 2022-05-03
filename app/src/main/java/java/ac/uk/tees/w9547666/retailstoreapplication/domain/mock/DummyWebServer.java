@@ -37,7 +37,7 @@ public class DummyWebServer {
                         "Alcohol",
                         "Alcoholic Drinks",
                         "10%",
-                        ""
+                        "cat_alcohol"
                 ));
 
         listOfCategory
@@ -45,7 +45,7 @@ public class DummyWebServer {
                         "Hot drinks and smothies",
                         "Hot drinks and the smothies",
                         "15%",
-                        ""));
+                        "cat_hotdrinks"));
 
         Repository.getCenterRepository().setListOfCategory(listOfCategory);
     }
@@ -66,7 +66,7 @@ public class DummyWebServer {
                         "0",
                         "2.99",
                         "0",
-                        "D:\\Android Dev\\Retail Shop Application\\images\\dragon-soop-blue-reaspberry-500ml.jpg",
+                        "glass_drinks",
                         "d_venom"));
 
         DragonSoopList
@@ -78,7 +78,7 @@ public class DummyWebServer {
                         "0",
                         "2.99",
                         "0",
-                        "D:\\Android Dev\\Retail Shop Application\\images\\dragon-soop-blue-reaspberry-500ml.jpg",
+                        "glass_drinks",
                         "d_apple"));
 
         DragonSoopList
@@ -90,7 +90,7 @@ public class DummyWebServer {
                         "0",
                         "2.99",
                         "0",
-                        "D:\\Android Dev\\Retail Shop Application\\images\\dragon-soop-blue-reaspberry-500ml.jpg",
+                        "glass_drinks",
                         "d_mango"));
 
         DragonSoopList
@@ -102,7 +102,7 @@ public class DummyWebServer {
                         "0",
                         "2.99",
                         "0",
-                        "D:\\Android Dev\\Retail Shop Application\\images\\dragon-soop-blue-reaspberry-500ml.jpg",
+                        "glass_drinks",
                         "d_blue"));
 
         DragonSoopList
@@ -114,7 +114,7 @@ public class DummyWebServer {
                         "0",
                         "2.99",
                         "0",
-                        "D:\\Android Dev\\Retail Shop Application\\images\\dragon-soop-blue-reaspberry-500ml.jpg",
+                        "glass_drinks",
                         "d_darkf"));
 
         productMap.put("DRAGONSOOP", DragonSoopList);
@@ -130,7 +130,7 @@ public class DummyWebServer {
                 "0",
                 "20.99",
                 "0",
-                "D:\\Android Dev\\Retail Shop Application\\images\\dragon-soop-blue-reaspberry-500ml.jpg",
+                "glass_drinks",
                 "smirnoff"));
 
         vodkaList.add(new Product(
@@ -141,7 +141,7 @@ public class DummyWebServer {
                 "0",
                 "20.99",
                 "0",
-                "D:\\Android Dev\\Retail Shop Application\\images\\dragon-soop-blue-reaspberry-500ml.jpg",
+                "glass_drinks",
                 "glenz"));
 
 
@@ -158,7 +158,7 @@ public class DummyWebServer {
                         "0",
                         "1.5",
                         "0",
-                        "D:\\Android Dev\\Retail Shop Application\\images\\dragon-soop-blue-reaspberry-500ml.jpg",
+                        "glass_drinks",
                         "carling"));
 
         ciderList
@@ -170,7 +170,7 @@ public class DummyWebServer {
                         "0",
                         "1.5",
                         "0",
-                        "D:\\Android Dev\\Retail Shop Application\\images\\dragon-soop-blue-reaspberry-500ml.jpg",
+                        "glass_drinks",
                         "foster"));
 
         productMap.put("Cider", ciderList);

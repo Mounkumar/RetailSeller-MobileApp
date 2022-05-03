@@ -78,6 +78,13 @@ public class ProductListAdapter extends
         return viewHolder;
     }
 
+    public int getImage(String imageName) {
+
+      //  int drawableResourceId = this.getResources().getIdentifier(imageName, "drawable", this.getPackageName());
+        int drawableResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
+
+        return drawableResourceId;
+    }
     @Override
     public void onBindViewHolder(final VersionViewHolder holder,
                                  @SuppressLint("RecyclerView") final int position) {
@@ -112,7 +119,10 @@ public class ProductListAdapter extends
 
         ImageUrl = productList.get(position).getImageURL();
 
-        Glide.with(context).load(new File(ImageUrl)).placeholder(drawable)
+        /*Glide.with(context).load(new File(ImageUrl)).placeholder(drawable)
+                .error(drawable)
+                .centerCrop().into(holder.imagView);*/
+        Glide.with(context).load(getImage(ImageUrl)).placeholder(drawable)
                 .error(drawable)
                 .centerCrop().into(holder.imagView);
 

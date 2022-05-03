@@ -61,7 +61,7 @@ public class ProductCategoryLoader extends AsyncTask<String, Void, Void> {
                         @Override
                         public void onItemClick(View view, int position) {
 
-                           // AppConstants.CURRENT_CATEGORY = position;
+                           Utils.CURRENT_CATEGORY = position;
 
                             Utils.switchFragmentWithAnimation(
                                     R.id.frag_container,

@@ -71,7 +71,11 @@ public class CategoryListAdapter extends
 
         ImageUrl = categoryList.get(categoryIndex).getProdCategoryImageUrl();
 
-        Glide.with(context).load(ImageUrl).placeholder(drawable)
+        /*Glide.with(context).load(ImageUrl).placeholder(drawable)
+                .error(drawable)
+                .centerCrop().into(versionViewHolder.imagView);*/
+
+        Glide.with(context).load(getImage(ImageUrl)).placeholder(drawable)
                 .error(drawable)
                 .centerCrop().into(versionViewHolder.imagView);
 
@@ -82,6 +86,14 @@ public class CategoryListAdapter extends
         label.setTargetView(versionViewHolder.imagView, 10,
                 LabelView.Gravity.RIGHT_TOP);
 
+    }
+
+    public int getImage(String imageName) {
+
+        //  int drawableResourceId = this.getResources().getIdentifier(imageName, "drawable", this.getPackageName());
+        int drawableResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
+
+        return drawableResourceId;
     }
 
     @Override
@@ -123,6 +135,8 @@ public class CategoryListAdapter extends
         public void onClick(View v) {
             clickListener.onItemClick(v, getPosition());
         }
+
+
     }
 
 }

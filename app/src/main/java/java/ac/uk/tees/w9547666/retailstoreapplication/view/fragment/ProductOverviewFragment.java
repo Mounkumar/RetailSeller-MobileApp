@@ -50,7 +50,8 @@ public class ProductOverviewFragment extends Fragment {
         getActivity().setTitle("Products");
 
 
-        DummyWebServer.getDummyWebServer().getAllProducts(0);
+        DummyWebServer.getDummyWebServer().getAllProducts(Utils.CURRENT_CATEGORY);
+
 
 
         viewPager = (ViewPager) view.findViewById(R.id.htab_viewpager);

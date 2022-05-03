@@ -15,7 +15,7 @@ import android.view.animation.Transformation;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author w9547666
  */
 
-public class LabelView extends TextView {
+public class LabelView extends AppCompatTextView {
 
     private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
     private float _offsetx;
