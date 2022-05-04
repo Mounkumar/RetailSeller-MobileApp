@@ -28,7 +28,6 @@ public class MyCartFragment extends Fragment  {
 
     private static FrameLayout noItemDefault;
     private static RecyclerView recyclerView;
-    //private ItemTouchHelper mItemTouchHelper;
     public MyCartFragment() {
     }
 
@@ -88,35 +87,6 @@ public class MyCartFragment extends Fragment  {
             recyclerView.setLayoutManager(linearLayoutManager);
             recyclerView.setHasFixedSize(true);
 
-           /* ShoppingListAdapter shoppinListAdapter = new ShoppingListAdapter(
-                    getActivity(), this);
-
-            recyclerView.setAdapter(shoppinListAdapter);
-
-            shoppinListAdapter
-                    .SetOnItemClickListener(new OnItemClickListener() {
-
-                        @Override
-                        public void onItemClick(View view, int position) {
-
-                            Utils.switchFragmentWithAnimation(
-                                    R.id.frag_container,
-                                    new ProductDetailsFragment("", position,
-                                            true),
-                                    ((HomeActivity) (getContext())), null,
-                                    AnimationType.SLIDE_LEFT);
-
-                        }
-                    });*/
-
-
-
-
-          /*  ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(
-                    (ItemTouchHelperAdapter) shoppinListAdapter);
-            mItemTouchHelper = new ItemTouchHelper(callback);
-            mItemTouchHelper.attachToRecyclerView(recyclerView);*/
-
         } else {
 
             updateMyCartFragment(false);
@@ -124,49 +94,28 @@ public class MyCartFragment extends Fragment  {
         }
 
         view.findViewById(R.id.start_shopping).setOnClickListener(
-                new OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        Utils.switchContent(R.id.frag_container,
-                                Utils.HOME_FRAGMENT,
-                                ((HomeActivity) (getContext())),
-                                AnimationType.SLIDE_UP);
-
-                    }
-                });
+                v -> Utils.switchContent(R.id.frag_container,
+                        Utils.HOME_FRAGMENT,
+                        ((HomeActivity) (getContext())),
+                        AnimationType.SLIDE_UP));
 
         // Handle Back press
         view.setFocusableInTouchMode(true);
         view.requestFocus();
-        view.setOnKeyListener(new View.OnKeyListener() {
+        view.setOnKeyListener((v, keyCode, event) -> {
 
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if (event.getAction() == KeyEvent.ACTION_UP
+                    && keyCode == KeyEvent.KEYCODE_BACK) {
 
-                if (event.getAction() == KeyEvent.ACTION_UP
-                        && keyCode == KeyEvent.KEYCODE_BACK) {
+                Utils.switchContent(R.id.frag_container,
+                        Utils.HOME_FRAGMENT,
+                        ((HomeActivity) (getContext())),
+                        AnimationType.SLIDE_UP);
 
-                    Utils.switchContent(R.id.frag_container,
-                            Utils.HOME_FRAGMENT,
-                            ((HomeActivity) (getContext())),
-                            AnimationType.SLIDE_UP);
-
-                }
-                return true;
             }
+            return true;
         });
 
         return view;
     }
-
-//    @Override
-//    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-//        mItemTouchHelper.startDrag(viewHolder);
-//    }
-
-   /* @Override
-    public void onStartDrag(ShoppingListAdapter.ItemViewHolder viewHolder) {
-        mItemTouchHelper.startDrag(viewHolder);
-    }*/
 }

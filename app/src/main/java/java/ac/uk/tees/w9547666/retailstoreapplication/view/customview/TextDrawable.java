@@ -142,45 +142,45 @@ public class TextDrawable extends ShapeDrawable {
     }
 
     public interface IConfigBuilder {
-        public IConfigBuilder width(int width);
+       /* public IConfigBuilder width(int width);
 
-        public IConfigBuilder height(int height);
+        public IConfigBuilder height(int height);*/
 
         public IConfigBuilder textColor(int color);
 
         public IConfigBuilder withBorder(int thickness);
 
-        public IConfigBuilder useFont(Typeface font);
+       /* public IConfigBuilder useFont(Typeface font);
 
         public IConfigBuilder fontSize(int size);
 
         public IConfigBuilder bold();
 
-        public IConfigBuilder toUpperCase();
+        public IConfigBuilder toUpperCase();*/
 
         public IShapeBuilder endConfig();
     }
 
-    public static interface IBuilder {
+    public interface IBuilder {
 
-        public TextDrawable build(String text, int color);
+        TextDrawable build(String text, int color);
     }
 
-    public static interface IShapeBuilder {
+    public interface IShapeBuilder {
 
-        public IConfigBuilder beginConfig();
+        IConfigBuilder beginConfig();
 
-        public IBuilder rect();
+        IBuilder rect();
 
-        public IBuilder round();
+        IBuilder round();
 
-        public IBuilder roundRect(int radius);
+        IBuilder roundRect(int radius);
 
-        public TextDrawable buildRect(String text, int color);
+        TextDrawable buildRect(String text, int color);
 
-        public TextDrawable buildRoundRect(String text, int color, int radius);
+        TextDrawable buildRoundRect(String text, int color, int radius);
 
-        public TextDrawable buildRound(String text, int color);
+        TextDrawable buildRound(String text, int color);
     }
 
     public static class Builder implements IConfigBuilder, IShapeBuilder, IBuilder {

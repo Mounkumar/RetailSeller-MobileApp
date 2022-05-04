@@ -42,9 +42,6 @@ import java.math.BigDecimal;
  * @author w9547666
  */
 
-/**
- * Fragment that appears in the "content_frame", shows a animal.
- */
 public class ProductDetailsFragment extends Fragment {
 
     private int productListNumber;

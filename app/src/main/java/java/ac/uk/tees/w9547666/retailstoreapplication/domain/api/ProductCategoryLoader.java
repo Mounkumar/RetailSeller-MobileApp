@@ -56,20 +56,16 @@ public class ProductCategoryLoader extends AsyncTask<String, Void, Void> {
             recyclerView.setAdapter(simpleRecyclerAdapter);
 
             simpleRecyclerAdapter
-                    .SetOnItemClickListener(new OnItemClickListener() {
+                    .SetOnItemClickListener((view, position) -> {
 
-                        @Override
-                        public void onItemClick(View view, int position) {
+                       Utils.CURRENT_CATEGORY = position;
 
-                           Utils.CURRENT_CATEGORY = position;
+                        Utils.switchFragmentWithAnimation(
+                                R.id.frag_container,
+                                new ProductOverviewFragment(),
+                                ((HomeActivity) context), null,
+                                AnimationType.SLIDE_LEFT);
 
-                            Utils.switchFragmentWithAnimation(
-                                    R.id.frag_container,
-                                    new ProductOverviewFragment(),
-                                    ((HomeActivity) context), null,
-                                    AnimationType.SLIDE_LEFT);
-
-                        }
                     });
         }
 

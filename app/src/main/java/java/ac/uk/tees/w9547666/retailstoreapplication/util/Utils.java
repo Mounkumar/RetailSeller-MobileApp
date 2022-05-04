@@ -104,8 +104,7 @@ public class Utils {
         FragmentManager fragmentManager = baseActivity
                 .getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        // If our current fragment is null, or the new fragment is different, we
-        // need to change our current fragment
+
         if (CURRENT_TAG == null || !TAG.equals(CURRENT_TAG)) {
 
             if (transitionStyle != null) {

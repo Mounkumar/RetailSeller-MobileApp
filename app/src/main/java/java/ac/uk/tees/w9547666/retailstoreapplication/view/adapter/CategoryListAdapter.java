@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -43,12 +44,12 @@ public class CategoryListAdapter extends
         this.context = context;
     }
 
+    @NonNull
     @Override
     public VersionViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(
                 R.layout.item_category_list, viewGroup, false);
-        VersionViewHolder viewHolder = new VersionViewHolder(view);
-        return viewHolder;
+        return new VersionViewHolder(view);
     }
 
     @Override
@@ -71,10 +72,6 @@ public class CategoryListAdapter extends
 
         ImageUrl = categoryList.get(categoryIndex).getProdCategoryImageUrl();
 
-        /*Glide.with(context).load(ImageUrl).placeholder(drawable)
-                .error(drawable)
-                .centerCrop().into(versionViewHolder.imagView);*/
-
         Glide.with(context).load(getImage(ImageUrl)).placeholder(drawable)
                 .error(drawable)
                 .centerCrop().into(versionViewHolder.imagView);
@@ -91,9 +88,8 @@ public class CategoryListAdapter extends
     public int getImage(String imageName) {
 
         //  int drawableResourceId = this.getResources().getIdentifier(imageName, "drawable", this.getPackageName());
-        int drawableResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
 
-        return drawableResourceId;
+        return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
     }
 
     @Override

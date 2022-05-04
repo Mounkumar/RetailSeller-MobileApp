@@ -31,14 +31,8 @@ import java.math.BigDecimal;
 
 public class SimilarProductsPagerAdapter extends PagerAdapter {
 
-    /**
-     * The m context.
-     */
-    Context mContext;
 
-    /**
-     * The m layout inflater.
-     */
+    Context mContext;
     LayoutInflater mLayoutInflater;
 
     private String productCategory;
@@ -178,84 +172,5 @@ public class SimilarProductsPagerAdapter extends PagerAdapter {
         container.removeView((FrameLayout) object);
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see android.support.v4.view.PagerAdapter#destroyItem(android.view.View,
-     * int, java.lang.Object)
-     */
-    @Override
-    public void destroyItem(View arg0, int arg1, Object arg2) {
-        // TODO Auto-generated method stub
 
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see android.support.v4.view.PagerAdapter#finishUpdate(android.view.View)
-     */
-    @Override
-    public void finishUpdate(View arg0) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * android.support.v4.view.PagerAdapter#instantiateItem(android.view.View,
-     * int)
-     */
-    @Override
-    public Object instantiateItem(View arg0, int arg1) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * android.support.v4.view.PagerAdapter#restoreState(android.os.Parcelable,
-     * java.lang.ClassLoader)
-     */
-    @Override
-    public void restoreState(Parcelable arg0, ClassLoader arg1) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see android.support.v4.view.PagerAdapter#saveState()
-     */
-    @Override
-    public Parcelable saveState() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see android.support.v4.view.PagerAdapter#getPageWidth(int)
-     */
-    @Override
-    public float getPageWidth(int position) {
-        return (0.5f);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see android.support.v4.view.PagerAdapter#startUpdate(android.view.View)
-     */
-    @Override
-    public void startUpdate(View arg0) {
-        // TODO Auto-generated method stub
-
-    }
 }

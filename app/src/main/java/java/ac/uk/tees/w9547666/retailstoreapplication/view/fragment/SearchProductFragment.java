@@ -62,7 +62,7 @@ public class SearchProductFragment extends Fragment {
         rootView = inflater.inflate(R.layout.frag_search_product,
                 container, false);
 
-        btnSpeak = (ImageButton) rootView.findViewById(R.id.btnSpeak);
+        btnSpeak = (ImageButton) rootView.findViewById(R.id.search_button);
 
         heading = (TextView) rootView.findViewById(R.id.txtSpeech_heading);
 

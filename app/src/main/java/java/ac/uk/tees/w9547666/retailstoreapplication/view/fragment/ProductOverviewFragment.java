@@ -1,5 +1,6 @@
 package java.ac.uk.tees.w9547666.retailstoreapplication.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -33,7 +34,6 @@ import java.util.Set;
 
 public class ProductOverviewFragment extends Fragment {
 
-    // SimpleRecyclerAdapter adapter;
     private KenBurnsView header;
     private Bitmap bitmap;
     private Toolbar mToolbar;
@@ -90,22 +90,18 @@ public class ProductOverviewFragment extends Fragment {
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
-        view.setOnKeyListener(new View.OnKeyListener() {
+        view.setOnKeyListener((v, keyCode, event) -> {
 
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if (event.getAction() == KeyEvent.ACTION_UP
+                    && keyCode == KeyEvent.KEYCODE_BACK) {
 
-                if (event.getAction() == KeyEvent.ACTION_UP
-                        && keyCode == KeyEvent.KEYCODE_BACK) {
+                Utils.switchContent(R.id.frag_container,
+                        Utils.HOME_FRAGMENT,
+                        ((HomeActivity) (getContext())),
+                        AnimationType.SLIDE_RIGHT);
 
-                    Utils.switchContent(R.id.frag_container,
-                            Utils.HOME_FRAGMENT,
-                            ((HomeActivity) (getContext())),
-                            AnimationType.SLIDE_RIGHT);
-
-                }
-                return true;
             }
+            return true;
         });
 
         return view;
@@ -120,18 +116,15 @@ public class ProductOverviewFragment extends Fragment {
         bitmap = BitmapFactory
                 .decodeResource(getResources(), R.drawable.header);
 
-        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-            @SuppressWarnings("ResourceType")
-            @Override
-            public void onGenerated(Palette palette) {
+        Palette.from(bitmap).generate(palette -> {
 
-                int vibrantColor = palette.getVibrantColor(R.color.primary_500);
-                int vibrantDarkColor = palette
-                        .getDarkVibrantColor(R.color.primary_700);
-                collapsingToolbarLayout.setContentScrimColor(vibrantColor);
-                collapsingToolbarLayout
-                        .setStatusBarScrimColor(vibrantDarkColor);
-            }
+            @SuppressLint("ResourceAsColor")
+            int vibrantColor = palette.getVibrantColor(R.color.primary_500);
+            @SuppressLint("ResourceAsColor") int vibrantDarkColor = palette
+                    .getDarkVibrantColor(R.color.primary_700);
+            collapsingToolbarLayout.setContentScrimColor(vibrantColor);
+            collapsingToolbarLayout
+                    .setStatusBarScrimColor(vibrantDarkColor);
         });
 
         tabLayout
@@ -199,20 +192,17 @@ public class ProductOverviewFragment extends Fragment {
                                         getResources(), R.drawable.header2);
 
                                 Palette.from(bitmap).generate(
-                                        new Palette.PaletteAsyncListener() {
-                                            @SuppressWarnings("ResourceType")
-                                            @Override
-                                            public void onGenerated(Palette palette) {
-
-                                                int vibrantColor = palette
-                                                        .getVibrantColor(R.color.primary_500);
-                                                int vibrantDarkColor = palette
-                                                        .getDarkVibrantColor(R.color.primary_700);
-                                                collapsingToolbarLayout
-                                                        .setContentScrimColor(vibrantColor);
-                                                collapsingToolbarLayout
-                                                        .setStatusBarScrimColor(vibrantDarkColor);
-                                            }
+                                        palette -> {
+                                            @SuppressLint("ResourceAsColor")
+                                             int vibrantColor = palette
+                                                    .getVibrantColor(R.color.primary_500);
+                                            @SuppressLint("ResourceAsColor")
+                                            int vibrantDarkColor = palette
+                                                    .getDarkVibrantColor(R.color.primary_700);
+                                            collapsingToolbarLayout
+                                                    .setContentScrimColor(vibrantColor);
+                                            collapsingToolbarLayout
+                                                    .setStatusBarScrimColor(vibrantDarkColor);
                                         });
 
                                 break;

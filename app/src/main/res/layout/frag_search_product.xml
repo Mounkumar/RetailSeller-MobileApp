@@ -40,10 +40,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_toLeftOf="@+id/btnSpeak"
+            android:layout_toLeftOf="@+id/search_button"
             android:background="@drawable/rounder_rectangle_visa_card"
             android:hapticFeedbackEnabled="true"
-            android:hint="What do you wish for ?"
+            android:hint="Search here"
             android:marqueeRepeatLimit="marquee_forever"
             android:padding="5dp"
             android:singleLine="true"
@@ -52,7 +52,7 @@
             android:textSize="20sp" />
 
         <ImageButton
-            android:id="@+id/btnSpeak"
+            android:id="@+id/search_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentRight="true"

@@ -46,25 +46,15 @@ public class ProductListFragment extends Fragment {
         if (isShoppingList) {
             view.findViewById(R.id.slide_down).setVisibility(View.VISIBLE);
             view.findViewById(R.id.slide_down).setOnTouchListener(
-                    new OnTouchListener() {
-
-                        @Override
-                        public boolean onTouch(View v, MotionEvent event) {
-
-//							Utils.switchContent(R.id.top_container,
-//									Utils.HOME_FRAGMENT,
-//									((ECartHomeActivity) (getContext())),
-//									AnimationType.SLIDE_DOWN);
-
-                            Utils.switchFragmentWithAnimation(
-                                    R.id.frag_container,
-                                    new HomeFragment(),
-                                    ((HomeActivity) (getContext())), Utils.HOME_FRAGMENT,
-                                    AnimationType.SLIDE_DOWN);
+                    (v, event) -> {
+                        Utils.switchFragmentWithAnimation(
+                                R.id.frag_container,
+                                new HomeFragment(),
+                                ((HomeActivity) (getContext())), Utils.HOME_FRAGMENT,
+                                AnimationType.SLIDE_DOWN);
 
 
-                            return false;
-                        }
+                        return false;
                     });
         }
 
@@ -83,44 +73,27 @@ public class ProductListFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
-        adapter.SetOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(View view, int position) {
-
-                Utils.switchFragmentWithAnimation(R.id.frag_container,
-                        new ProductDetailsFragment(subcategoryKey, position, false),
-                        ((HomeActivity) (getContext())), null,
-                        AnimationType.SLIDE_LEFT);
-
-            }
-        });
+        adapter.SetOnItemClickListener((view1, position) -> Utils.switchFragmentWithAnimation(R.id.frag_container,
+                new ProductDetailsFragment(subcategoryKey, position, false),
+                ((HomeActivity) (getContext())), null,
+                AnimationType.SLIDE_LEFT));
 
         // Handle Back press
         view.setFocusableInTouchMode(true);
         view.requestFocus();
-        view.setOnKeyListener(new View.OnKeyListener() {
+        view.setOnKeyListener((v, keyCode, event) -> {
 
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if (event.getAction() == KeyEvent.ACTION_UP
+                    && keyCode == KeyEvent.KEYCODE_BACK) {
 
-                if (event.getAction() == KeyEvent.ACTION_UP
-                        && keyCode == KeyEvent.KEYCODE_BACK) {
+                Utils.switchFragmentWithAnimation(
+                        R.id.frag_container,
+                        new HomeFragment(),
+                        ((HomeActivity) (getContext())), Utils.HOME_FRAGMENT,
+                        AnimationType.SLIDE_UP);
 
-//					Utils.switchContent(R.id.top_container,
-//							Utils.HOME_FRAGMENT,
-//							((ECartHomeActivity) (getContext())),
-//							AnimationType.SLIDE_UP);
-
-                    Utils.switchFragmentWithAnimation(
-                            R.id.frag_container,
-                            new HomeFragment(),
-                            ((HomeActivity) (getContext())), Utils.HOME_FRAGMENT,
-                            AnimationType.SLIDE_UP);
-
-                }
-                return true;
             }
+            return true;
         });
 
         return view;

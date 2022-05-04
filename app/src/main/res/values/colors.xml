@@ -31,8 +31,8 @@
     <color name="primary">#3f51b5</color>
 
     <!-- Indigo 500 -->
-    <color name="primary_500">#3F51B5</color>
+    <color name="primary_500">#dd2c00</color>
     <!-- Indigo 700 -->
-    <color name="primary_700">#303F9F</color>
+    <color name="primary_700">#a30000</color>
 
 </resources>

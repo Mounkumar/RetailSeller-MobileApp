@@ -81,9 +81,8 @@ public class ProductListAdapter extends
     public int getImage(String imageName) {
 
       //  int drawableResourceId = this.getResources().getIdentifier(imageName, "drawable", this.getPackageName());
-        int drawableResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
 
-        return drawableResourceId;
+        return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
     }
     @Override
     public void onBindViewHolder(final VersionViewHolder holder,
@@ -95,11 +94,11 @@ public class ProductListAdapter extends
         holder.itemDesc.setText(productList.get(position)
                 .getItemShortDesc());
         String sellCostString = Money.rupees(
-                BigDecimal.valueOf(Double.valueOf(productList.get(position)
+                BigDecimal.valueOf(Double.parseDouble(productList.get(position)
                         .getSellMRP())))
                 + "  ";
         String buyMRP = Money.rupees(
-                BigDecimal.valueOf(Double.valueOf(productList.get(position)
+                BigDecimal.valueOf(Double.parseDouble(productList.get(position)
                         .getMRP()))).toString();
         String costString = sellCostString + buyMRP;
 
@@ -119,91 +118,87 @@ public class ProductListAdapter extends
 
         ImageUrl = productList.get(position).getImageURL();
 
-        /*Glide.with(context).load(new File(ImageUrl)).placeholder(drawable)
-                .error(drawable)
-                .centerCrop().into(holder.imagView);*/
+
         Glide.with(context).load(getImage(ImageUrl)).placeholder(drawable)
                 .error(drawable)
                 .centerCrop().into(holder.imagView);
 
 
         holder.addItem.findViewById(R.id.add_item).setOnClickListener(
-                new OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
+                v -> {
 
 
-                        //current object
-                        Product tempObj = productList.get(position);
+                    //current object
+                    Product tempObj = productList.get(position);
 
 
-                        //if current object is lready in shopping list
-                        if (Repository.getCenterRepository()
-                                .getListOfProductsInShoppingList().contains(tempObj)) {
+                    //if current object is lready in shopping list
+                    if (Repository.getCenterRepository()
+                            .getListOfProductsInShoppingList().contains(tempObj)) {
 
 
-                            //get position of current item in shopping list
-                            int indexOfTempInShopingList = Repository
-                                    .getCenterRepository().getListOfProductsInShoppingList()
-                                    .indexOf(tempObj);
+                        //get position of current item in shopping list
+                        int indexOfTempInShopingList = Repository
+                                .getCenterRepository().getListOfProductsInShoppingList()
+                                .indexOf(tempObj);
 
-                            // increase quantity of current item in shopping list
-                            if (Integer.parseInt(tempObj.getQuantity()) == 0) {
+                        // increase quantity of current item in shopping list
+                        if (Integer.parseInt(tempObj.getQuantity()) == 0) {
 
-                                ((HomeActivity) getContext())
-                                        .updateItemCount(true);
-
-                            }
-
-
-                            // update quanity in shopping list
-                            Repository
-                                    .getCenterRepository()
-                                    .getListOfProductsInShoppingList()
-                                    .get(indexOfTempInShopingList)
-                                    .setQuantity(
-                                            String.valueOf(Integer
-                                                    .valueOf(tempObj
-                                                            .getQuantity()) + 1));
-
-
-                            //update checkout amount
-                            ((HomeActivity) getContext()).updateCheckOutAmount(
-                                    BigDecimal
-                                            .valueOf(Long
-                                                    .valueOf(productList
-                                                            .get(position)
-                                                            .getSellMRP())),
-                                    true);
-
-                            // update current item quanitity
-                            holder.quanitity.setText(tempObj.getQuantity());
-
-                        } else {
-
-                            ((HomeActivity) getContext()).updateItemCount(true);
-
-                            tempObj.setQuantity(String.valueOf(1));
-
-                            holder.quanitity.setText(tempObj.getQuantity());
-
-                            Repository.getCenterRepository()
-                                    .getListOfProductsInShoppingList().add(tempObj);
-
-                            ((HomeActivity) getContext()).updateCheckOutAmount(
-                                    BigDecimal
-                                            .valueOf(Long
-                                                    .valueOf(productList
-                                                            .get(position)
-                                                            .getSellMRP())),
-                                    true);
+                            ((HomeActivity) getContext())
+                                    .updateItemCount(true);
 
                         }
 
-                        Utils.vibrate(getContext());
+
+                        // update quanity in shopping list
+                        Repository
+                                .getCenterRepository()
+                                .getListOfProductsInShoppingList()
+                                .get(indexOfTempInShopingList)
+                                .setQuantity(
+                                        String.valueOf(Integer
+                                                .parseInt(tempObj
+                                                        .getQuantity()) + 1));
+
+
+                        //update checkout amount
+                        ((HomeActivity) getContext()).updateCheckOutAmount(
+                               new BigDecimal(productList.get(position).getSellMRP())
+                               /* BigDecimal
+                                        .valueOf(Long
+                                                .valueOf(productList
+                                                        .get(position)
+                                                        .getSellMRP()))*/,
+                                true);
+
+                        // update current item quanitity
+                        holder.quanitity.setText(tempObj.getQuantity());
+
+                    } else {
+
+                        ((HomeActivity) getContext()).updateItemCount(true);
+
+                        tempObj.setQuantity(String.valueOf(1));
+
+                        holder.quanitity.setText(tempObj.getQuantity());
+
+                        Repository.getCenterRepository()
+                                .getListOfProductsInShoppingList().add(tempObj);
+
+                        ((HomeActivity) getContext()).updateCheckOutAmount(
+                                new BigDecimal(productList.get(position).getSellMRP())
+                                /*BigDecimal
+                                        .valueOf(Long
+                                                .valueOf(productList
+                                                        .get(position)
+                                                        .getSellMRP()))*/,
+                                true);
 
                     }
+
+                    Utils.vibrate(getContext());
+
                 });
 
         holder.removeItem.setOnClickListener(new OnClickListener() {
@@ -220,18 +215,18 @@ public class ProductListAdapter extends
                             .getCenterRepository().getListOfProductsInShoppingList()
                             .indexOf(tempObj);
 
-                    if (Integer.valueOf(tempObj.getQuantity()) != 0) {
+                    if (Integer.parseInt(tempObj.getQuantity()) != 0) {
 
                         Repository
                                 .getCenterRepository()
                                 .getListOfProductsInShoppingList()
                                 .get(indexOfTempInShopingList)
                                 .setQuantity(
-                                        String.valueOf(Integer.valueOf(tempObj
+                                        String.valueOf(Integer.parseInt(tempObj
                                                 .getQuantity()) - 1));
 
                         ((HomeActivity) getContext()).updateCheckOutAmount(
-                                BigDecimal.valueOf(Long.valueOf(productList
+                                BigDecimal.valueOf(Long.parseLong(productList
                                         .get(position).getSellMRP())),
                                 false);
 
@@ -241,7 +236,7 @@ public class ProductListAdapter extends
 
                         Utils.vibrate(getContext());
 
-                        if (Integer.valueOf(Repository
+                        if (Integer.parseInt(Repository
                                 .getCenterRepository().getListOfProductsInShoppingList()
                                 .get(indexOfTempInShopingList).getQuantity()) == 0) {
 
@@ -257,8 +252,6 @@ public class ProductListAdapter extends
                         }
 
                     }
-
-                } else {
 
                 }
 
